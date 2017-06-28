@@ -38,7 +38,7 @@
 				<textarea class="form-control" rows="5" id="comment"></textarea>
 			</div>
 		</form>
-
+		
 		<input id="confirmBtn" type='submit' class="btn btn-info" value="Submit Button" onclick="startProcess()">
 		
 	</div>
@@ -57,15 +57,13 @@
 			} else {
 				
 				var data = {
-					"messageName": "instantiationMessage", "processVariables" : { "amount" : {"value" : document.getElementById("amount").value, "type": "Double"}, "username" : {"value" : document.getElementById("username").value, "type": "String"},"email" : {"value" : document.getElementById("email").value, "type": "String"}}
+					"messageName": "instantiationMessage", "processVariables" : { "amount" : {"value" : document.getElementById("amount").value, "type": "Double"}, "username" : {"value" : document.getElementById("username").value, "type": "String"},"email" : {"value" : document.getElementById("email").value, "type": "String"},"invoiceDocument" : {"value" : "TESTTEST", "type": "String"}}
 				};
 
 				$.ajax({
-					type : 'POST',
-					url : "/engine-rest/message",
+					type : 'GET',
+					url : "/iss-process/create?username=" + document.getElementById("username").value + "&email=" + document.getElementById("email").value + "&amount=" + document.getElementById("amount").value + "&comment="+ document.getElementById("comment").value,
 					processData : false,
-					contentType : 'application/json',
-					data : JSON.stringify(data),
 					success : function(r) {
 						console.log('success', r);
 						
