@@ -68,8 +68,8 @@
 						console.log('success', r);
 						
 						alert(r);
-										
-						window.location.href = 'requestConfirm';
+							
+						location.reload();
 					},
 					
 					error: function (request, status, error) {
