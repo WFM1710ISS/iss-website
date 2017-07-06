@@ -21,6 +21,10 @@
 			ISS:</p>
 		<form>
 			<div class="form-group">
+				<label for="company">Company:</label> 
+				<input type="text" class="form-control" id="company">
+			</div>
+			<div class="form-group">
 				<label for="username">Full Name:</label> 
 				<input type="text" class="form-control" id="username">
 			</div>
@@ -29,13 +33,28 @@
 				<input type="text" class="form-control" id="email">
 			</div>
 			<div class="form-group">
-				<label for="amount">Amount:</label> 
-				<input type="text" class="form-control" id="amount">
+				<label for="phone">Phone:</label> 
+				<input type="text" class="form-control" id="phone">
 			</div>
-  
 			<div class="form-group">
-				<label for="comment">Comment:</label>
-				<textarea class="form-control" rows="5" id="comment"></textarea>
+				<label for="street">Street:</label> 
+				<input type="text" class="form-control" id="street">
+			</div>
+			<div class="form-group">
+				<label for="zip">Zip-Code:</label> 
+				<input type="text" class="form-control" id="zip">
+			</div>
+ 			<div class="form-group">
+				<label for="city">City:</label> 
+				<input type="text" class="form-control" id="city">
+			</div> 
+			<div class="form-group">
+				<label for="designreq">Design Requirements:</label>
+				<textarea class="form-control" rows="5" id="designreq"></textarea>
+			</div>
+			<div class="form-group">
+				<label for="securityreq">Security Requirements:</label>
+				<textarea class="form-control" rows="5" id="securityreq"></textarea>
 			</div>
 		</form>
 		
@@ -57,19 +76,30 @@
 			} else {
 				
 				var data = {
-					"messageName": "instantiationMessage", "processVariables" : { "amount" : {"value" : document.getElementById("amount").value, "type": "Double"}, "username" : {"value" : document.getElementById("username").value, "type": "String"},"email" : {"value" : document.getElementById("email").value, "type": "String"},"invoiceDocument" : {"value" : "TESTTEST", "type": "String"}}
+					"messageName": "instantiationMessage", 
+					"processVariables" : { 
+						"company" : {"value" : document.getElementById("company").value, "type": "String"}, 
+						"username" : {"value" : document.getElementById("username").value, "type": "String"},
+						"email" : {"value" : document.getElementById("email").value, "type": "String"},
+						"phone" : {"value" : document.getElementById("phone").value, "type": "String"},
+						"street" : {"value" : document.getElementById("street").value, "type": "String"},
+						"zip" : {"value" : document.getElementById("zip").value, "type": "String"},
+						"city" : {"value" : document.getElementById("city").value, "type": "String"},
+						"designreq" : {"value" : document.getElementById("designreq").value, "type": "String"},
+						"securityreq" : {"value" : document.getElementById("securityreq").value, "type": "String"},
+					}
 				};
 
 				$.ajax({
 					type : 'GET',
-					url : "/iss-process/create?username=" + document.getElementById("username").value + "&email=" + document.getElementById("email").value + "&amount=" + document.getElementById("amount").value + "&comment="+ document.getElementById("comment").value,
+					url : "/iss-process/startProcess?company=" + document.getElementById("company").value + "&username=" + document.getElementById("username").value + "&email=" + document.getElementById("email").value + "&phone=" + document.getElementById("phone").value + "&street=" + document.getElementById("street").value + "&zip=" + document.getElementById("zip").value + "&city=" + document.getElementById("city").value + "&designreq=" + document.getElementById("designreq").value + "&securityreq=" + document.getElementById("securityreq").value,
+
 					processData : false,
 					success : function(r) {
 						console.log('success', r);
 						
 						alert(r);
 							
-						location.reload();
 					},
 					
 					error: function (request, status, error) {
